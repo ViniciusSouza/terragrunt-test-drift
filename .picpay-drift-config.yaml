@@ -1,0 +1,26 @@
+# Test Repository Override Configuration
+
+# This repository has custom drift detection settings
+drift_detection:
+  # Only report critical and high severity drift
+  severity_threshold: "high"
+  
+  # Give this repository more time to process
+  per_repo_timeout: "20m"
+  
+  # Ignore test resources in this repository
+  global_ignore_resources:
+    - "random_string.*"
+    - "aws_instance.test_*"
+    - "time_sleep.*"
+
+# Custom GitHub settings for this repository  
+github:
+  # Disable issue creation for this test repository
+  create_issues: false
+  
+  # If issues were enabled, use these custom labels
+  issue_labels:
+    - "team:test"
+    - "repository:example"
+    - "automated"

@@ -1,0 +1,8 @@
+# Terragrunt generated files
+backend.tf
+provider.tf
+.terraform.tfstate.lock.info
+.terragrunt-cache
+.terraform.lock.hcl
+.terraform
+terraform.tfstate*
