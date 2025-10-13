@@ -73,7 +73,7 @@ clean-all:
 	@echo "🧹 Performing complete cleanup (resources + cache + state)..."
 	@echo ""
 	@echo "🔍 Checking for drift-test resource groups..."
-	@az group list --query "[?contains(name, 'drift-test') || contains(name, 'terragrunt')].[name]" -o tsv | powershell -Command "$$input | ForEach-Object { if ($$_.Trim()) { Write-Host \"   Deleting: $$_\" -ForegroundColor Red; az group delete --name $$_.Trim() --yes --no-wait } }"
+	@powershell -Command "$$groups = az group list --query \"[?contains(name, 'drift-test') || contains(name, 'terragrunt')].[name]\" -o tsv; if ($$groups) { $$groups | ForEach-Object { Write-Host \"   Deleting: $$_\" -ForegroundColor Red; az group delete --name $$_ --yes --no-wait } } else { Write-Host \"   No resource groups found\" -ForegroundColor Green }"
 	@echo ""
 	@echo "🗂️  Cleaning Terragrunt cache and state files..."
 	@powershell -Command "Get-ChildItem -Path 'terragrunt' -Recurse -Directory -Name '*terragrunt-cache*' | ForEach-Object { Remove-Item -Path \"terragrunt\\$$_\" -Recurse -Force -ErrorAction SilentlyContinue }"

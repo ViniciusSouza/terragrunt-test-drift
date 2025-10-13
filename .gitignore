@@ -5,5 +5,10 @@ provider.tf
 .terragrunt-cache
 .terraform.lock.hcl
 .terraform
+
+# Terraform state files (now stored in Azure Storage remote backend)
+# Remote state: stterraformstate6406/tfstate container
 terraform.tfstate*
+
+# Drift detection reports
 drift-reports

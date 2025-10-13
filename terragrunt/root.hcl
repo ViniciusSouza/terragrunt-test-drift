@@ -25,12 +25,16 @@ locals {
   }
 }
 
-# Remote state configuration (using local backend for testing)
-# Each module gets its own state file to prevent contamination
+# Remote state configuration using Azure Storage with Azure AD authentication
+# Each module gets its own state file with unique key path
 remote_state {
-  backend = "local"
+  backend = "azurerm"
   config = {
-    path = "${path_relative_to_include()}/terraform.tfstate"
+    resource_group_name  = "rg-terraform-state"
+    storage_account_name = "stterraformstate6406"
+    container_name       = "tfstate"
+    key                  = "${path_relative_to_include()}/terraform.tfstate"
+    use_azuread_auth     = true
   }
   
   generate = {
