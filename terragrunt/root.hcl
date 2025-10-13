@@ -26,10 +26,11 @@ locals {
 }
 
 # Remote state configuration (using local backend for testing)
+# Each module gets its own state file to prevent contamination
 remote_state {
   backend = "local"
   config = {
-    path = "${get_parent_terragrunt_dir()}/terraform.tfstate"
+    path = "${path_relative_to_include()}/terraform.tfstate"
   }
   
   generate = {
