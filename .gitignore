@@ -6,3 +6,4 @@ provider.tf
 .terraform.lock.hcl
 .terraform
 terraform.tfstate*
+drift-reports
