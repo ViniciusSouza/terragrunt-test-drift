@@ -14,14 +14,13 @@ locals {
   resource_name  = length(local.path_parts) > 4 ? local.path_parts[4] : "default"
   
   # Common tags for all resources
+  # DRIFT: Tags updated to match current cloud state (drift-script modifications)
+  # RECOMMENDATION: Consider restoring CloudProvider, Region, ResourceType tags for better resource organization
   common_tags = {
-    Environment   = local.account
-    ManagedBy     = "terragrunt"
-    Project       = "drift-detector-test"
-    Purpose       = "testing-terragrunt-integration"
-    CloudProvider = local.cloud_provider
-    Region        = local.region
-    ResourceType  = local.resource_type
+    Environment   = "production"  # DRIFT: Changed from local.account ('dev') to match cloud state
+    ManagedBy     = "manual"       # DRIFT: Changed from 'terragrunt' to match cloud state
+    DriftCreated  = "true"         # DRIFT: Added by drift-script
+    ModifiedBy    = "drift-script" # DRIFT: Added by drift-script
   }
 }
 

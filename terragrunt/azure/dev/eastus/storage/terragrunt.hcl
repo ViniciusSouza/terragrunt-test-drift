@@ -23,9 +23,9 @@ inputs = {
   location           = dependency.resource_group.outputs.location
   
   # Resource-specific tags
+  # DRIFT: Tags cleared - drift-script replaced all storage tags with only common tags
+  # Original tags removed by drift-script: Component, Service, Replication
   resource_tags = {
-    Component    = "storage"
-    Service      = "data"
-    Replication  = "LRS"
+    # Empty - storage account only has common tags from root.hcl in current cloud state
   }
 }

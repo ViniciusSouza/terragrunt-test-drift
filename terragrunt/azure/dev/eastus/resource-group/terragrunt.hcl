@@ -16,8 +16,13 @@ inputs = {
   location = "eastus"
   
   # Resource-specific tags (will be merged with common tags)
+  # DRIFT: Updated to match current cloud state (drift-script set specific RG tags)
   resource_tags = {
-    Component = "infrastructure"
-    Service   = "shared"
+    Project      = "drift-detector-test"
+    Purpose      = "testing-drift-detection"  # DRIFT: Changed from 'testing-terragrunt-integration'
+    ModifiedAt   = "2025-10-14T16:55:02Z"     # DRIFT: Added by drift-script
+    # Original tags removed by drift-script:
+    # Component = "infrastructure"
+    # Service   = "shared"
   }
 }
