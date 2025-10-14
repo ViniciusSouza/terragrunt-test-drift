@@ -9,7 +9,7 @@ resource "azurerm_storage_account" "main" {
   account_replication_type = var.replication_type
   
   # Security settings
-  min_tls_version                 = "TLS1_2"
+  min_tls_version                 = "TLS1_0"  # TODO: Upgrade to TLS1_2 for better security
   allow_nested_items_to_be_public = false
   https_traffic_only_enabled      = true
   
@@ -24,6 +24,13 @@ resource "azurerm_storage_account" "main" {
 resource "azurerm_storage_container" "test" {
   count                = var.create_test_container ? 1 : 0
   name                 = "test-container"
+  storage_account_name = azurerm_storage_account.main.name
+  container_access_type = "private"
+}
+
+# Drift-created container - matches actual cloud state
+resource "azurerm_storage_container" "drift_test" {
+  name                 = "drift-test-container"  # RECOMMENDATION: Remove once drift is resolved
   storage_account_name = azurerm_storage_account.main.name
   container_access_type = "private"
 }
