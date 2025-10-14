@@ -17,11 +17,6 @@ locals {
   common_tags = {
     Environment   = "production"  # TODO: Align with account naming convention (was local.account)
     ManagedBy     = "manual"  # TODO: Change back to "terragrunt" for proper automation
-    Project       = "drift-detector-test"
-    Purpose       = "testing-drift-detection"
-    CloudProvider = local.cloud_provider
-    Region        = local.region
-    ResourceType  = local.resource_type
   }
 }
 

@@ -24,9 +24,6 @@ inputs = {
   
   # Resource-specific tags
   resource_tags = {
-    Component    = "storage"
-    Service      = "data"
-    Replication  = "LRS"
     DriftCreated = "true"  # RECOMMENDATION: Remove once drift is resolved
     ModifiedBy   = "drift-script"  # RECOMMENDATION: Remove once drift is resolved
   }
