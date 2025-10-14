@@ -2,6 +2,8 @@
 
 This repository contains a test environment for demonstrating Terragrunt drift detection capabilities. It creates Azure resources using Terragrunt and provides tools to simulate configuration drift.
 
+> 📚 **New to drift remediation?** Check out the [comprehensive documentation](./docs/README.md) for guides, quick fixes, and automated tools.
+
 ## 📋 Prerequisites
 
 Before using this repository, ensure you have the following tools installed:
@@ -87,8 +89,14 @@ If you prefer to run commands manually:
 │   │   └── storage-account/      # Storage account Terraform module
 │   └── *.tf                     # Backend and provider configurations
 ├── scripts/                      # Utility scripts
-│   └── create-drift.ps1         # PowerShell script to create drift
+│   ├── create-drift.ps1         # PowerShell script to create drift
+│   └── fix-drift.sh             # Bash script to fix drift
+├── docs/                         # Documentation
+│   ├── README.md                # Documentation index
+│   ├── ISSUE_RESPONSE.md        # Issue response template
+│   └── drift-quick-fix.md       # Quick fix reference
 ├── drift-reports/               # Drift detection reports
+├── DRIFT_REMEDIATION.md         # Comprehensive remediation guide
 ├── Makefile                     # Build automation
 └── README.md                    # This file
 ```

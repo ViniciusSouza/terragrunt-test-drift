@@ -27,6 +27,9 @@ help:
 	@echo "  5. make fix-drift       # Fix the drift (or make deploy)"
 	@echo "  6. make clean-resources # Clean up when done"
 	@echo ""
+	@echo "📚 Documentation:"
+	@echo "  See docs/README.md for comprehensive drift remediation guides"
+	@echo ""
 
 # Check if required dependencies are installed
 check-deps:
