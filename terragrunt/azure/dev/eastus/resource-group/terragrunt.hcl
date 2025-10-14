@@ -17,7 +17,10 @@ inputs = {
   
   # Resource-specific tags (will be merged with common tags)
   resource_tags = {
-    Component = "infrastructure"
-    Service   = "shared"
+    Component    = "infrastructure"
+    Service      = "shared"
+    DriftCreated = "true"  # RECOMMENDATION: Remove this tag once drift is resolved
+    ModifiedBy   = "drift-script"  # RECOMMENDATION: Remove this tag once drift is resolved
+    ModifiedAt   = "2025-10-14T16:37:28Z"  # RECOMMENDATION: Remove this tag once drift is resolved
   }
 }

@@ -27,5 +27,7 @@ inputs = {
     Component    = "storage"
     Service      = "data"
     Replication  = "LRS"
+    DriftCreated = "true"  # RECOMMENDATION: Remove this tag once drift is resolved
+    ModifiedBy   = "drift-script"  # RECOMMENDATION: Remove this tag once drift is resolved
   }
 }

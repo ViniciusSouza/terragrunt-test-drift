@@ -15,10 +15,10 @@ locals {
   
   # Common tags for all resources
   common_tags = {
-    Environment   = local.account
-    ManagedBy     = "terragrunt"
+    Environment   = "production"  # TODO: Should align with local.account for proper environment management
+    ManagedBy     = "manual"  # TODO: Should be "terragrunt" for proper IaC management
     Project       = "drift-detector-test"
-    Purpose       = "testing-terragrunt-integration"
+    Purpose       = "testing-drift-detection"  # Updated to match current cloud state
     CloudProvider = local.cloud_provider
     Region        = local.region
     ResourceType  = local.resource_type

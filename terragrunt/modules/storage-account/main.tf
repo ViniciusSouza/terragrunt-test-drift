@@ -9,7 +9,7 @@ resource "azurerm_storage_account" "main" {
   account_replication_type = var.replication_type
   
   # Security settings
-  min_tls_version                 = "TLS1_2"
+  min_tls_version                 = "TLS1_0"  # TODO: Upgrade to TLS1_2 for better security - current cloud state uses TLS1_0
   allow_nested_items_to_be_public = false
   https_traffic_only_enabled      = true
   
