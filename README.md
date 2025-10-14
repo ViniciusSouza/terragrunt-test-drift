@@ -147,6 +147,31 @@ Example expected drift output:
 }
 ```
 
+### 🔧 Fixing Detected Drift
+
+When drift is detected, you have several options to remediate it:
+
+1. **Automated Fix** (Recommended for test environment):
+   ```bash
+   ./scripts/fix-drift.sh
+   ```
+
+2. **Manual Fix** (Review changes first):
+   ```bash
+   cd terragrunt
+   terragrunt run-all plan    # Review changes
+   terragrunt run-all apply   # Apply to fix drift
+   ```
+
+3. **Quick Fix via Makefile**:
+   ```bash
+   make deploy
+   ```
+
+For detailed remediation guidance, see:
+- 📖 [Complete Drift Remediation Guide](./DRIFT_REMEDIATION.md) - Comprehensive analysis and remediation strategies
+- 🚀 [Quick Fix Reference](./docs/drift-quick-fix.md) - Fast commands for common scenarios
+
 ## 🛠️ Troubleshooting
 
 ### Common Issues

@@ -1,7 +1,7 @@
 # Terragrunt Test Drift Makefile
 # This Makefile provides convenient targets for managing Terragrunt resources and testing drift detection
 
-.PHONY: help deploy create-resources clean-resources clean-all add-drift plan status check-deps
+.PHONY: help deploy create-resources clean-resources clean-all add-drift fix-drift plan status check-deps
 
 # Default target - show help
 help:
@@ -15,6 +15,7 @@ help:
 	@echo "  clean-resources  - Destroy all Terragrunt resources in Azure"
 	@echo "  clean-all       - Complete cleanup (resources + cache + state)"
 	@echo "  add-drift       - Create drift by modifying Azure resources"
+	@echo "  fix-drift       - Fix detected drift (automated remediation)"
 	@echo "  plan            - Show what Terragrunt would change (detect drift)"
 	@echo "  status          - Show current status of Terragrunt resources"
 	@echo ""
@@ -23,7 +24,8 @@ help:
 	@echo "  2. make deploy          # Deploy infrastructure (or make create-resources for first time)"
 	@echo "  3. make add-drift       # Modify resources to create drift"
 	@echo "  4. make plan            # Detect the drift"
-	@echo "  5. make clean-resources # Clean up when done"
+	@echo "  5. make fix-drift       # Fix the drift (or make deploy)"
+	@echo "  6. make clean-resources # Clean up when done"
 	@echo ""
 
 # Check if required dependencies are installed
@@ -88,6 +90,12 @@ add-drift: check-deps
 	@echo "🔧 Adding drift to existing resources..."
 	@echo ""
 	@powershell -ExecutionPolicy Bypass -File "scripts/create-drift.ps1"
+
+# Fix drift by running the automated remediation script
+fix-drift: check-deps
+	@echo "🔧 Fixing detected drift..."
+	@echo ""
+	@bash scripts/fix-drift.sh
 
 # Show what Terragrunt would change (drift detection)
 plan:
