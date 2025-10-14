@@ -14,16 +14,26 @@ help:
 	@echo "  create-resources - Create all Terragrunt resources in Azure"
 	@echo "  clean-resources  - Destroy all Terragrunt resources in Azure"
 	@echo "  clean-all       - Complete cleanup (resources + cache + state)"
-	@echo "  add-drift       - Create drift by modifying Azure resources"
+	@echo "  add-drift       - Create drift by modifying Azure resources (legacy)"
+	@echo "  drift-test      - Complete drift test workflow (enable access + create drift + cleanup)"
+	@echo "  drift-test-keep - Drift test workflow but keep storage access open"
+	@echo "  storage-enable  - Enable storage access for manual testing"
+	@echo "  storage-disable - Disable storage access to restore security"
+	@echo "  storage-status  - Check current storage access status"
 	@echo "  plan            - Show what Terragrunt would change (detect drift)"
 	@echo "  status          - Show current status of Terragrunt resources"
 	@echo ""
 	@echo "Typical workflow:"
 	@echo "  1. make check-deps      # Ensure tools are installed"
 	@echo "  2. make deploy          # Deploy infrastructure (or make create-resources for first time)"
-	@echo "  3. make add-drift       # Modify resources to create drift"
+	@echo "  3. make drift-test      # Automated: enable access + create drift + secure cleanup"
 	@echo "  4. make plan            # Detect the drift"
 	@echo "  5. make clean-resources # Clean up when done"
+	@echo ""
+	@echo "Alternative manual workflow:"
+	@echo "  3a. make storage-enable # Manually enable storage access"
+	@echo "  3b. make add-drift      # Create drift using legacy method"
+	@echo "  3c. make storage-disable # Manually disable storage access"
 	@echo ""
 
 # Check if required dependencies are installed
@@ -115,3 +125,32 @@ init:
 refresh:
 	@echo "🔄 Refreshing Terragrunt state..."
 	@cd terragrunt && terragrunt refresh --all
+
+# === Storage Access Management Targets ===
+
+# Complete automated drift test workflow
+drift-test: check-deps
+	@echo "🌊 Running complete drift test workflow..."
+	@echo ""
+	@powershell -ExecutionPolicy Bypass -File "scripts/run-drift-test.ps1"
+
+# Drift test workflow but keep storage access open for continued testing
+drift-test-keep: check-deps
+	@echo "🌊 Running drift test workflow (keeping storage access open)..."
+	@echo ""
+	@powershell -ExecutionPolicy Bypass -File "scripts/run-drift-test.ps1" -KeepAccessOpen
+
+# Enable storage access for manual testing
+storage-enable:
+	@echo "🔓 Enabling storage access..."
+	@powershell -ExecutionPolicy Bypass -File "scripts/manage-storage-access.ps1" -Action enable
+
+# Disable storage access to restore security
+storage-disable:
+	@echo "🔒 Disabling storage access..."
+	@powershell -ExecutionPolicy Bypass -File "scripts/manage-storage-access.ps1" -Action disable
+
+# Check storage access status
+storage-status:
+	@echo "📊 Checking storage access status..."
+	@powershell -ExecutionPolicy Bypass -File "scripts/manage-storage-access.ps1" -Action status
