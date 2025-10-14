@@ -14,14 +14,12 @@ locals {
   resource_name  = length(local.path_parts) > 4 ? local.path_parts[4] : "default"
   
   # Common tags for all resources
+  # Note: Tags modified in cloud - IaC updated to match actual state
   common_tags = {
-    Environment   = local.account
-    ManagedBy     = "terragrunt"
-    Project       = "drift-detector-test"
-    Purpose       = "testing-terragrunt-integration"
-    CloudProvider = local.cloud_provider
-    Region        = local.region
-    ResourceType  = local.resource_type
+    Environment   = "production"  # TODO: Should be "dev" to match environment naming
+    ManagedBy     = "manual"  # TODO: Change to "terragrunt" for proper IaC management
+    DriftCreated  = "true"  # RECOMMENDATION: Remove once drift is resolved
+    ModifiedBy    = "drift-script"  # RECOMMENDATION: Remove once drift is resolved
   }
 }
 

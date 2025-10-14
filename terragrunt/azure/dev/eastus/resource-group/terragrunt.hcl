@@ -16,8 +16,9 @@ inputs = {
   location = "eastus"
   
   # Resource-specific tags (will be merged with common tags)
+  # Updated to match actual cloud state after drift
   resource_tags = {
-    Component = "infrastructure"
-    Service   = "shared"
+    Project = "drift-detector-test"
+    Purpose = "testing-drift-detection"  # TODO: Update to "testing-terragrunt-integration"
   }
 }

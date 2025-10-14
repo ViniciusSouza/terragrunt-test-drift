@@ -23,9 +23,8 @@ inputs = {
   location           = dependency.resource_group.outputs.location
   
   # Resource-specific tags
+  # Tags removed to match actual cloud state after drift
   resource_tags = {
-    Component    = "storage"
-    Service      = "data"
-    Replication  = "LRS"
+    # All previous tags were removed by drift script
   }
 }
