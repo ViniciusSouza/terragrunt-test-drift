@@ -94,7 +94,7 @@ clean-all:
 	@echo "✅ Complete cleanup finished! Ready for fresh start."
 
 # Add drift by running the PowerShell script
-add-drift: check-deps
+add-drift: check-deps 
 	@echo "🔧 Adding drift to existing resources..."
 	@echo ""
 	@powershell -ExecutionPolicy Bypass -File "scripts/create-drift.ps1"
@@ -142,15 +142,21 @@ drift-test-keep: check-deps
 
 # Enable storage access for manual testing
 storage-enable:
-	@echo "🔓 Enabling storage access..."
-	@powershell -ExecutionPolicy Bypass -File "scripts/manage-storage-access.ps1" -Action enable
+	@echo "Enabling storage access..."
+	@echo "INFO: Enabling public network access for stterraformstate6406"
+	@powershell -Command "az storage account update --name stterraformstate6406 --resource-group rg-terraform-state --public-network-access 'Enabled' --output none"
+	@echo "SUCCESS: Storage access enabled"
+	@echo "INFO: Testing access..."
+	@powershell -Command "try { az storage blob list --container-name tfstate --account-name stterraformstate6406 --auth-mode login --output table; Write-Host 'SUCCESS: Storage access test passed' } catch { Write-Host 'WARNING: Storage access enabled but test failed - may need time to propagate' -ForegroundColor Yellow }"
 
 # Disable storage access to restore security
 storage-disable:
-	@echo "🔒 Disabling storage access..."
-	@powershell -ExecutionPolicy Bypass -File "scripts/manage-storage-access.ps1" -Action disable
+	@echo "Disabling storage access..."
+	@echo "INFO: Disabling public network access for stterraformstate6406"
+	@powershell -Command "az storage account update --name stterraformstate6406 --resource-group rg-terraform-state --public-network-access 'Disabled' --output none"
+	@echo "SUCCESS: Storage access disabled - security restored"
 
 # Check storage access status
 storage-status:
-	@echo "📊 Checking storage access status..."
-	@powershell -ExecutionPolicy Bypass -File "scripts/manage-storage-access.ps1" -Action status
+	@echo "Checking storage access status..."
+	@powershell -Command "az storage account show --name stterraformstate6406 --resource-group rg-terraform-state --query '{account: name, publicAccess: publicNetworkAccess, defenderRules: networkRuleSet.resourceAccessRules[0].resourceId}' --output table"
