@@ -23,9 +23,5 @@ inputs = {
   location           = dependency.resource_group.outputs.location
   
   # Resource-specific tags
-  resource_tags = {
-    Component    = "storage"
-    Service      = "data"
-    Replication  = "LRS"
-  }
+  resource_tags = {}  # RECOMMENDATION: Re-add Component, Service, and Replication tags for better resource documentation
 }
