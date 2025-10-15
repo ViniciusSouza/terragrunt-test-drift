@@ -22,10 +22,7 @@ inputs = {
   resource_group_name = dependency.resource_group.outputs.name
   location           = dependency.resource_group.outputs.location
   
-  # Resource-specific tags
-  resource_tags = {
-    Component    = "storage"
-    Service      = "data"
-    Replication  = "LRS"
-  }
+  # Resource-specific tags (will be merged with common tags)
+  # Note: Cloud state has no additional tags beyond common_tags
+  resource_tags = {}
 }

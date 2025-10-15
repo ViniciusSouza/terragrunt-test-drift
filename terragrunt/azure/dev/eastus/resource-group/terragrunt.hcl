@@ -17,7 +17,8 @@ inputs = {
   
   # Resource-specific tags (will be merged with common tags)
   resource_tags = {
-    Component = "infrastructure"
-    Service   = "shared"
+    Project    = "drift-detector-test"
+    Purpose    = "testing-drift-detection"
+    ModifiedAt = "2025-10-15T09:58:50Z"  # RECOMMENDATION: This timestamp will drift on next manual change
   }
 }

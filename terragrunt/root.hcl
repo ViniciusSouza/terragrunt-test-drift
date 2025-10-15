@@ -15,13 +15,10 @@ locals {
   
   # Common tags for all resources
   common_tags = {
-    Environment   = local.account
-    ManagedBy     = "terragrunt"
-    Project       = "drift-detector-test"
-    Purpose       = "testing-terragrunt-integration"
-    CloudProvider = local.cloud_provider
-    Region        = local.region
-    ResourceType  = local.resource_type
+    Environment  = "production"  # RECOMMENDATION: Align with account variable once drift is resolved
+    ManagedBy    = "manual"  # RECOMMENDATION: Change back to "terragrunt" once drift is resolved
+    DriftCreated = "true"  # RECOMMENDATION: Remove this tag once drift is resolved
+    ModifiedBy   = "drift-script"  # RECOMMENDATION: Remove this tag once drift is resolved
   }
 }
 
